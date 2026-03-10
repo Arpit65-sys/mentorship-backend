@@ -79,7 +79,7 @@ utils/
 ## 1 Clone Repository
 
 ```
-git clone <your-repo-url>
+git clone https://github.com/Arpit65-sys/mentorship-backend.git
 cd mentorship-backend
 ```
 
