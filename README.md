@@ -55,6 +55,7 @@ controllers/
  ├── studentController.js
  ├── lessonController.js
  ├── bookingController.js
+ ├── llmController.js
  └── sessionController.js
 
 routes/
@@ -62,6 +63,7 @@ routes/
  ├── studentRoutes.js
  ├── lessonRoutes.js
  ├── bookingRoutes.js
+ ├── llmRoutes.js
  └── sessionRoutes.js
 
 middleware/
@@ -438,6 +440,87 @@ Students attend lesson sessions
 
 ---
 
+### LLM Text Summarization API
+
+This backend includes a Lightweight LLM integration that summarizes long text using the Google Gemini API.
+
+The feature allows clients to send long text and receive a concise summary in bullet points.
+
+The API uses the Gemini Flash Lite model for fast and efficient summarization.
+
+Endpoint
+
+`
+POST /llm/summarize
+`
+
+Request Body
+
+```
+{
+  "text": "Your long text here..."
+}
+```
+
+Response
+
+```
+{
+  "summary": "• Point 1\n• Point 2\n• Point 3",
+  "model": "gemini-2.0-flash-lite"
+}
+```
+
+The response returns:
+
+summary → Generated summarized text
+
+model → The LLM model used for summarization
+
+### LLM Implementation
+
+The summarization feature is implemented using two main components:
+
+Environment Variables
+
+The Gemini API key is loaded securely using environment variables.
+
+Add this to your .env file:
+
+```
+GEMINI_API_KEY=your_api_key_here
+```
+
+Example using curl:
+
+```
+curl -X POST http://localhost:5000/llm/summarize \
+-H "Content-Type: application/json" \
+-d '{
+"text": "Artificial intelligence is transforming industries by automating tasks, improving decision making, and enabling new technologies across healthcare, education, and finance."
+}'
+
+```
+
+Example Response:
+
+```
+{
+  "summary": "• AI automates tasks across industries\n• Improves decision making\n• Enables innovation in sectors like healthcare and education",
+  "model": "gemini-2.0-flash-lite"
+}
+```
+
+Summary Format
+
+The LLM generates summaries as:
+
+3–5 bullet points
+
+Concise and readable
+
+Maximum ~120 words
+
 # Security Practices
 
 This backend implements several security best practices.
@@ -448,4 +531,3 @@ This backend implements several security best practices.
 * Environment variables for secrets
 * Protected routes
 
----
