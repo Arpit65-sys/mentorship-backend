@@ -108,6 +108,10 @@ JWT_SECRET=supersecretkey
 ```
 node server.js
 ```
+or
+```
+npm start
+```
 
 Server will run on:
 
